@@ -26,6 +26,8 @@
 		"prepare": "husky install"
 	},
 	"dependencies": {
+		"@jsplumb/browser-ui": "^5.7.1",
+		"@jsplumb/connector-bezier": "^5.7.1",
 		"vue": "^3.2.36"
 	},
 	"devDependencies": {
