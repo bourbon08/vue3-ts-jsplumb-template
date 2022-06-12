@@ -48,6 +48,7 @@
     "mapWritableState": true,
     "markRaw": true,
     "nextTick": true,
+    "nodeInfoStore": true,
     "onActivated": true,
     "onBeforeMount": true,
     "onBeforeUnmount": true,

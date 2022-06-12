@@ -1,28 +1,47 @@
 <template>
-	<div
-		v-for="(item, index) in nodeList"
-		:id="item.idName"
-		:key="index"
-		class="item"
-		:style="{ left: item.left, top: item.top }"
-	>
-		{{ item.content }}
-	</div>
+    <div id="diagramContainer" @dragstart="handleDragStart">
+        <div
+            v-for="(item, index) in nodeList"
+            :id="item.idName"
+            :key="index"
+            class="drag-item"
+            :style="{ left: item.left, top: item.top }"
+            :data-index="index"
+            :data-index1="index"
+            :draggable="true"
+        >
+            {{ item.content }}
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
 defineProps({
-	nodeList: {
-		type: Object,
-		default: () => ({
-			lists: [],
-			idName: '',
-			left: '',
-			top: '',
-			content: '',
-		}),
-	},
+    nodeList: {
+        type: Object,
+        default: () => {
+            return [
+                {
+                    idName: '11',
+                    left: '10px',
+                    top: '20px',
+                    content: '123',
+                },
+            ]
+        },
+        // 	lists: [],
+        // 	idName: '',
+        // 	left: '',
+        // 	top: '',
+        // 	content: '',
+        // }),
+    },
 })
+
+function handleDragStart(e: any) {
+    console.log(e.target.dataset)
+    e.dataTransfer.setData('index', e.target.dataset.index)
+}
 // let nodeData = {
 // 	// 324
 // 	lists: [
@@ -67,19 +86,26 @@ defineProps({
 // }
 </script>
 
-<style>
+<script lang="ts">
+export default {
+    name: 'Container',
+}
+</script>
+
+<style scoped>
 #diagramContainer {
-	padding: 20px;
-	width: 80%;
-	height: 400px;
-	border: 1px solid gray;
-	position: relative;
+    padding: 20px;
+    width: 80%;
+    height: 400px;
+    border: 1px solid gray;
+    position: relative;
 }
 
-.item {
-	position: absolute;
-	height: 80px;
-	width: 80px;
-	border: 1px solid blue;
+.drag-item {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    border: 1px solid blue;
+    user-select: none;
 }
 </style>
